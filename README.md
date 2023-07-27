@@ -27,6 +27,6 @@ npm run start
 ```
 
 ## Tech Stack
-React.js
-react-dropdown-select
-CSS
+- React.js
+- react-dropdown-select
+- CSS
