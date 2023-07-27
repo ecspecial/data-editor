@@ -2,22 +2,26 @@ import { useState, useEffect, useRef } from "react";
 import { Alert } from "./Alert";
 import './style.css';
 
+// Define RecordCard functional component, which receives record and handleRecordChange as props
 function RecordCard({ record, handleRecordChange }) {
-    const [isEditing, setIsEditing] = useState(false);
-    const [value, setValue] = useState(record.value);
-    const [input, setInput] = useState("");
-    const [isSaveHovered, setIsSaveHovered] = useState(false);
-    const [isCancelHovered, setIsCancelHovered] = useState(false);
-    const [errorText, setErrorText] = useState("");
-    const editDiv = useRef(null);
-    const textAreaRef = useRef(null);
+    // Initialize state variables and refs
+    const [isEditing, setIsEditing] = useState(false); // A boolean to track if the record is being edited
+    const [value, setValue] = useState(record.value); // The current value of the record
+    const [input, setInput] = useState(""); // The user input in the edit area
+    const [isSaveHovered, setIsSaveHovered] = useState(false); // A boolean to track if the save button is hovered
+    const [isCancelHovered, setIsCancelHovered] = useState(false); // A boolean to track if the cancel button is hovered
+    const [errorText, setErrorText] = useState(""); // The error message
+    const editDiv = useRef(null); // Reference to the outer div of the record
+    const textAreaRef = useRef(null); // Reference to the textarea element
 
+    // Handle click on the edit button
     const handleEditClick = (e) => {
-        e.stopPropagation();
-        setErrorText("");
-        setInput(value);
-        setIsEditing(true);
+        e.stopPropagation(); // Prevent triggering of any parent's onClick handlers
+        setErrorText(""); // Reset error message
+        setInput(value); // Set the input to be the current value of the record
+        setIsEditing(true); // Set the isEditing state to true
 
+        // Set the height of the textarea to fit its content after a delay to ensure that the textAreaRef.current is available
         setTimeout(() => {
             if (textAreaRef.current) {
                 textAreaRef.current.style.height = "0px";
@@ -27,22 +31,25 @@ function RecordCard({ record, handleRecordChange }) {
         }, 0);
     }
 
+    // Handle click on the cancel button
     const handleCancelClick = (e) => {
-        e.stopPropagation();
-        setErrorText("");
-        setIsEditing(false);
+        e.stopPropagation(); // Prevent triggering of any parent's onClick handlers
+        setErrorText(""); // Reset error message
+        setIsEditing(false); // Set the isEditing state to false
     }
 
+    // Handle change in the textarea
     const handleChange = (e) => {
-        // Check input validity directly when typing
-        const newInput = e.target.value;
+        const newInput = e.target.value; // Get the new input
+        // Check if the new input is empty
         if (newInput === "") {
-            setErrorText("Input can't be empty!");
+            setErrorText("Input can't be empty!"); // If empty, set the error message
         } else {
-            setErrorText("");
+            setErrorText(""); // If not empty, reset the error message
         }
 
-        setInput(newInput);
+        setInput(newInput); // Set the input state to the new input
+        // Adjust the height of the textarea to fit its content
         if (textAreaRef.current) {
             textAreaRef.current.style.height = "0px";
             const scrollHeight = textAreaRef.current.scrollHeight;
@@ -50,39 +57,29 @@ function RecordCard({ record, handleRecordChange }) {
         }
     };
 
+    // Handle click on the save button
     const handleSaveClick = () => {
         if (errorText) {
-            return;
+            return; // If there's an error, do nothing
         }
-        setValue(input);
-        handleRecordChange(record.name, input);
-        setIsEditing(false);
+        setValue(input); // Set the value state to the input
+        handleRecordChange(record.name, input); // Update the record in the parent component
+        setIsEditing(false); // Set the isEditing state to false
     }
 
-    // useEffect(() => {
-    //     const clickListener = (e) => {
-    //         if (isEditing && editDiv.current && !editDiv.current.contains(e.target)) {
-    //             handleCancelClick(e);
-    //         }
-    //     }
-
-    //     document.addEventListener('click', clickListener);
-        
-    //     return () => {
-    //         document.removeEventListener('click', clickListener);
-    //     }
-    // }, [isEditing]);
-
+    // Render the RecordCard component
     return (
         <div className="record" ref={editDiv}>
             <div>
             <h2>{record.name}</h2>
+            {/* If there's an error message, display it */}
             {errorText && (
                 <div className="error-text">
                     <Alert text={errorText}/>
                 </div>
             )}
             </div>
+            {/* If isEditing state is true, display the edit area and save/cancel buttons */}
             {isEditing ? (
                 <div className="record-card">
                     <div className="textarea-wrapper">
@@ -110,6 +107,7 @@ function RecordCard({ record, handleRecordChange }) {
                     </div>
                 </div>
             ) : (
+                /* Otherwise, display the record value and edit button */
                 <div className="record-card">
                     <div className="saved-div">
                         <div className="record-text">{value}</div>
