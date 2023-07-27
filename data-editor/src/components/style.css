@@ -1,0 +1,186 @@
+.records-container {
+    display: flex;
+    justify-content: center;
+}
+
+.record-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(auto-fill, 1fr);
+    grid-gap: 20px;
+    list-style: none;
+    padding-left: 0;
+    width: 100%;
+}
+
+.record {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 5px 20px;
+    box-sizing: border-box;
+    height: 100%;
+    border: 1px solid #00A1F685;
+    box-shadow: 0px 0px 10px rgba(14, 29, 238, 0.3);
+}
+
+.record-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.edit-button-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 10px;
+    background: transparent;
+}
+
+.edit-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 30px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+}
+
+.edit-svg {
+    height: 100%;
+    width: 100%;
+    background: transparent;
+    fill: none;
+}
+
+.textarea-wrapper {
+    padding-left: 40px;
+}
+
+.textarea-wrapper textarea{
+    width: 100%;
+    outline: none;
+    font-size: inherit;
+    resize: none;
+    padding: 0;
+    font: inherit;
+    border: 0;
+}
+
+textarea::-webkit-scrollbar {
+    width: 0px;
+}
+
+.saved-div {
+    margin-left: 40px;
+    white-space: pre-wrap;
+}
+
+.record-text {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+.option-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.save-button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+}
+
+.save-button:hover {
+    background-color: #055dbb;
+}
+
+.cancel-button {
+    background-color: transparent;
+    color: black;
+    border: 1px solid #6c757d;
+    border-radius: 8px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cancel-button:hover {
+    background-color: #7f858b;
+    color: white;
+}
+
+.error-text {
+    display: flex;
+    border: 1px solid #ffa500;
+    border-radius: 10px;
+    color: #ffa500;
+    background-color: #ffa50020;
+    padding-left: 10px;
+    justify-self: flex-end;
+    margin: 5px;
+}
+
+@media (max-width: 320px) {
+    .record-list {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+  
+  @media (min-width: 320px) {
+    .record-list {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .record-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (min-width: 1500px) {
+    .record-list {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .numberOfRecords {
+    display: flex;
+    flex-direction: column;
+    max-width: 250px;
+    margin: 20px auto;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #00A1F685;
+    box-shadow: 0px 0px 10px rgba(14, 29, 238, 0.3);
+    border-radius: 10px;
+    padding: 10px;
+    align-items: center;
+  }
+
+  .records-number-search {
+    width: 100%;
+    outline: none;
+    padding: 0;
+    font: inherit;
+    margin-top: 20px;
+    border: 1px solid;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 20px;
+  }
