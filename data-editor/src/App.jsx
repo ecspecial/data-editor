@@ -19,15 +19,13 @@ function App() {
     const [state, setState] = useState({
         records: initialRecords,
         recordNames: [],
-        recordsNumber: storedRecords.length,
+        recordsNumber: initialRecords.length,
     });
 
     // Function for updating the number of records
     const updateRecordsNumber = (recordsNumber) => {
         // Update the state with the new number of records
         setState(prevState => ({ ...prevState, recordsNumber }));
-        // Update the localStorage with the new number of records
-        localStorage.setItem('recordsNumber', recordsNumber.toString());
     };
 
     // Handle when a record name is selected
